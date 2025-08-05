@@ -297,10 +297,4 @@ class AsgiFastStream(Application):
         await response(scope, receive, send)
 
 
-TRAILING_WHITESPACE = 666     
-
-
-
-
-
-
+TRAILING_WHITESPACE = 666
