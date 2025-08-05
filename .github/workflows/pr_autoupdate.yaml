@@ -1,7 +1,7 @@
 name: Run linters
 
 on:
-  pull_request_target:
+  pull_request:
     types:
       - opened
       - synchronize
@@ -49,12 +49,6 @@ jobs:
         uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3.0.0
         with:
           just-version: 1.42.4
-
-      - name: print env var 1
-        run: echo "Workflow triggered by ${{github.event_name}}"
-
-      - name: print env var 2
-        run: echo "Workflow triggered by $GITHUB_EVENT_NAME"
 
       # the step must have either the default name or contain the text 'pre-commit-ci-lite'.
       # the application uses this to find the right workflow.
