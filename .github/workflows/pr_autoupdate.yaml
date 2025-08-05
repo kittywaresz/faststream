@@ -50,5 +50,14 @@ jobs:
         with:
           just-version: 1.42.4
 
-      - uses: pre-commit-ci/lite-action@5d6cc0eb514c891a40562a58a8e71576c5c7fb43 # v1.1.0
+      - name: print env var 1
+        run: echo "Workflow triggered by ${{github.event_name}}"
+
+      - name: print env var 2
+        run: echo "Workflow triggered by $GITHUB_EVENT_NAME"
+
+      # the step must have either the default name or contain the text 'pre-commit-ci-lite'.
+      # the application uses this to find the right workflow.
+      - name: Run pre-commit-ci-lite
+        uses: pre-commit-ci/lite-action@v5d6cc0eb514c891a40562a58a8e71576c5c7fb43 # v1.1.0
         if: always()
