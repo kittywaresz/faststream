@@ -50,6 +50,12 @@ jobs:
         with:
           just-version: 1.42.4
 
+      - name: Run pre-commit
+        uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
+        continue-on-error: true
+        with:
+          extra_args: --hook-stage manual --all-files
+
       # the step must have either the default name or contain the text 'pre-commit-ci-lite'.
       # the application uses this to find the right workflow.
       - name: Run pre-commit-ci-lite
