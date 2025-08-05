@@ -1,7 +1,11 @@
 name: Run linters
 
 on:
-  workflow_dispatch:
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - ready_for_review
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -46,16 +50,8 @@ jobs:
         with:
           just-version: 1.42.4
 
-      - name: Run pre-commit
-        uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
-        continue-on-error: true
-        with:
-          extra_args: --hook-stage manual --all-files
-
-      - name: Commit
-        uses: stefanzweifel/git-auto-commit-action@778341af668090896ca464160c2def5d1d1a3eb0 # v6.0.1
-        with:
-          commit_message: "chore: apply autofixes"
-          commit_user_name: faststream-actions[bot]
-          commit_user_email: faststream-actions[bot]@users.noreply.github.com
-          commit_author: faststream-actions[bot] <faststream-actions[bot]@users.noreply.github.com>
+      # the step must have either the default name or contain the text 'pre-commit-ci-lite'.
+      # the application uses this to find the right workflow.
+      - name: Run pre-commit-ci-lite
+        uses: pre-commit-ci/lite-action@v5d6cc0eb514c891a40562a58a8e71576c5c7fb43 # v1.1.0
+        if: always()
