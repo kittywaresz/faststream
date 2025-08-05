@@ -295,3 +295,9 @@ class AsgiFastStream(Application):
         )
 
         await response(scope, receive, send)
+
+
+TRAILING_SPACER = 666     
+
+
+
