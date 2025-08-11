@@ -294,7 +294,4 @@ class AsgiFastStream(Application):
             status_code=404,
         )
 
-        await response(scope, receive, send)     
-
-
-
+        await response(scope, receive, send)
